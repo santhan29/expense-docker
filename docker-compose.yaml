@@ -1,0 +1,23 @@
+version: "3"
+networks:
+  expense:
+volumes:
+  mysql:    #equals to docker volume create mysql
+services:
+  mysql: 
+    image: santhan29/mysql:v1
+    container_name: mysql 
+    volumes:
+    - mysql:/var/lib/mysql    #this var/lib/mysql is available in mysql imagge in docker hub 
+  backend:
+    image: santhan29/backend:v1
+    container_name: backend 
+    depends_on:
+    - mysql
+  frontend:
+    image: santhan29/frontend:v1
+    container_name: frontend 
+    ports:
+    - 80:80 
+    depends_on:
+    - backend 
