@@ -1,8 +1,8 @@
-FROM node:20 
+FROM node:20.18.0-alpine3.20 
 EXPOSE 8080 
 ENV DB_HOST="mysql"   
 RUN mkdir /opt/server
-WORKDIR /opt/server
+WORKDIR /opt/server 
 COPY package.json .
 COPY *.js .
 RUN npm install 
@@ -10,3 +10,14 @@ CMD ["node", "index.js"]
 
 #here we are using host network so we have to give local host instead of container name 
 #when we ar eusing bridge network we have to give mysql container name instead of ip address 
+
+#before best practices implemented
+# FROM node:20 
+# EXPOSE 8080 
+# ENV DB_HOST="mysql"   
+# RUN mkdir /opt/server
+# WORKDIR /opt/server
+# COPY package.json .
+# COPY *.js .
+# RUN npm install 
+# CMD ["node", "index.js"]
